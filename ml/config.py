@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from pathlib import Path
-import os
+
 from ml.version import MODEL_VERSION
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
