@@ -1,39 +1,44 @@
+version: "3.9"
+
 services:
   backend:
     build:
       context: .
       dockerfile: Dockerfile
+
     image: crop-yield-backend:latest
+
     container_name: crop-yield-backend
+
     environment:
       APP_NAME: Crop Yield Prediction API
       APP_ENV: production
-      API_VERSION: v1.0.0
-      MODEL_VERSION: v1.0.0
-      MODEL_PATH: /app/artifacts/models/v1.0.0/crop_yield_model.joblib
-      MODEL_METADATA_PATH: /app/artifacts/metrics/v1.0.0/model_metadata.json
-      PREPROCESSING_METADATA_PATH: /app/artifacts/metrics/v1.0.0/preprocessing_metadata.json
+
+      API_VERSION: v3.0.0
+      MODEL_VERSION: v3.0.0
+
+      MODEL_SOURCE: local
+
       PREDICTION_UNIT: hg/ha
       LOG_LEVEL: INFO
+
       CORS_ORIGINS: http://localhost:5173,http://localhost:3000
+
     ports:
       - "8000:8000"
+
+    restart: unless-stopped
+
     init: true
-    read_only: true
-    tmpfs:
-      - /tmp
-    security_opt:
-      - no-new-privileges:true
+
     healthcheck:
       test:
         [
           "CMD",
           "python",
           "-c",
-          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=3).read()",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health').read()",
         ]
       interval: 30s
       timeout: 5s
-      start_period: 20s
       retries: 3
-    restart: unless-stopped
