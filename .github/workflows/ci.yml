@@ -38,7 +38,7 @@ jobs:
       # NEW STEP
       - name: Train model and generate artifacts
         run: |
-          python ml/train.py
+          python -m ml.train
 
       - name: Verify artifacts
         run: |
