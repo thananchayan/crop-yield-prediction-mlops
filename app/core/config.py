@@ -13,6 +13,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
 
 def _csv_env(name: str, default: str = "") -> list[str]:
+    """Parse comma-separated environment variables."""
     value = os.getenv(name, default)
     return [item.strip() for item in value.split(",") if item.strip()]
 
@@ -24,27 +25,44 @@ class Settings:
     app_name: str = field(
         default_factory=lambda: os.getenv("APP_NAME", "Crop Yield Prediction API")
     )
+
     environment: str = field(
         default_factory=lambda: os.getenv("APP_ENV", "development")
     )
-    api_version: str = field(default_factory=lambda: os.getenv("API_VERSION", "v1.0.0"))
-    model_version: str = MODEL_VERSION
+
+    api_version: str = field(
+        default_factory=lambda: os.getenv("API_VERSION", MODEL_VERSION)
+    )
+
+    model_version: str = field(
+        default_factory=lambda: os.getenv("MODEL_VERSION", MODEL_VERSION)
+    )
+
     model_source: str = field(
         default_factory=lambda: os.getenv("MODEL_SOURCE", "local")
     )
+
     hf_model_repo_id: str = field(
         default_factory=lambda: os.getenv(
-            "HF_MODEL_REPO_ID", "thananchayan/crop-yield-regressor"
+            "HF_MODEL_REPO_ID",
+            "thananchayan/crop-yield-regressor",
         )
     )
+
     hf_model_revision: str = field(
         default_factory=lambda: os.getenv("HF_MODEL_REVISION", "main")
     )
+
     hf_model_cache_dir: Path = field(
         default_factory=lambda: Path(
-            os.getenv("HF_MODEL_CACHE_DIR", str(PROJECT_ROOT / ".cache" / "hf_models"))
+            os.getenv(
+                "HF_MODEL_CACHE_DIR",
+                str(PROJECT_ROOT / ".cache" / "hf_models"),
+            )
         )
     )
+
+    # ---------- IMPORTANT ----------
     model_path: Path = field(
         default_factory=lambda: Path(
             os.getenv(
@@ -53,12 +71,13 @@ class Settings:
                     PROJECT_ROOT
                     / "artifacts"
                     / "models"
-                    / "v1.0.0"
+                    / MODEL_VERSION
                     / "crop_yield_model.joblib"
                 ),
             )
         )
     )
+
     model_metadata_path: Path = field(
         default_factory=lambda: Path(
             os.getenv(
@@ -67,12 +86,13 @@ class Settings:
                     PROJECT_ROOT
                     / "artifacts"
                     / "metrics"
-                    / "v1.0.0"
+                    / MODEL_VERSION
                     / "model_metadata.json"
                 ),
             )
         )
     )
+
     preprocessing_metadata_path: Path = field(
         default_factory=lambda: Path(
             os.getenv(
@@ -81,33 +101,43 @@ class Settings:
                     PROJECT_ROOT
                     / "artifacts"
                     / "metrics"
-                    / "v1.0.0"
+                    / MODEL_VERSION
                     / "preprocessing_metadata.json"
                 ),
             )
         )
     )
+    # --------------------------------
+
     prediction_unit: str = field(
         default_factory=lambda: os.getenv("PREDICTION_UNIT", "hg/ha")
     )
+
     log_level: str = field(default_factory=lambda: os.getenv("LOG_LEVEL", "INFO"))
+
     frontend_dist_dir: Path = field(
         default_factory=lambda: Path(
-            os.getenv("FRONTEND_DIST_DIR", str(PROJECT_ROOT / "frontend" / "dist"))
+            os.getenv(
+                "FRONTEND_DIST_DIR",
+                str(PROJECT_ROOT / "frontend" / "dist"),
+            )
         )
     )
+
     cors_origins: list[str] = field(default_factory=list)
 
     def __post_init__(self) -> None:
         object.__setattr__(
             self,
             "cors_origins",
-            _csv_env("CORS_ORIGINS", "http://localhost:5173,http://localhost:3000"),
+            _csv_env(
+                "CORS_ORIGINS",
+                "http://localhost:5173,http://localhost:3000",
+            ),
         )
 
 
 @lru_cache
 def get_settings() -> Settings:
     """Return cached application settings."""
-
     return Settings()

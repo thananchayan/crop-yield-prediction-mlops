@@ -39,6 +39,14 @@ jobs:
         run: |
           python -m ml.train
 
+      - name: Show generated artifacts
+        run: |
+          echo "===== Models ====="
+          find artifacts/models -type f
+
+          echo "===== Metrics ====="
+          find artifacts/metrics -type f
+
       - name: Verify generated artifacts
         run: |
           echo "===== Current directory ====="
