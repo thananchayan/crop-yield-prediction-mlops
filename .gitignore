@@ -1,0 +1,129 @@
+# ==========================
+# Python
+# ==========================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.pyd
+*.pyo
+
+# Virtual Environment
+.venv/
+venv/
+env/
+ENV/
+
+# Python Environment Files
+.python-version
+
+# ==========================
+# Environment Variables
+# ==========================
+.env
+.env.*
+!.env.example
+
+# ==========================
+# Logs
+# ==========================
+logs/
+*.log
+
+# ==========================
+# Pytest
+# ==========================
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# ==========================
+# Ruff / Black / MyPy
+# ==========================
+.ruff_cache/
+.mypy_cache/
+.dmypy.json
+
+# ==========================
+# Jupyter
+# ==========================
+.ipynb_checkpoints/
+
+# ==========================
+# VS Code
+# ==========================
+.vscode/
+
+# ==========================
+# IntelliJ / PyCharm
+# ==========================
+.idea/
+
+# ==========================
+# OS Files
+# ==========================
+.DS_Store
+Thumbs.db
+
+# ==========================
+# Node / React
+# ==========================
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# npm logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ==========================
+# Build Artifacts
+# ==========================
+build/
+dist/
+
+# ==========================
+# ML Models
+# (Don't store trained models in Git)
+# ==========================
+models/
+artifacts/
+
+*.joblib
+*.pkl
+*.pickle
+*.h5
+*.onnx
+*.pt
+*.pth
+
+# ==========================
+# Temporary Files
+# ==========================
+*.tmp
+*.bak
+*.swp
+
+# ==========================
+# Hugging Face Cache
+# ==========================
+.cache/
+huggingface_cache/
+
+# ==========================
+# Docker
+# ==========================
+docker-data/
+
+# ==========================
+# Local Database
+# ==========================
+*.db
+*.sqlite3
+
+# ==========================
+# Coverage Reports
+# ==========================
+coverage/

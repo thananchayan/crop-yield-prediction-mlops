@@ -1,0 +1,36 @@
+[tool.black]
+line-length = 88
+target-version = ["py310"]
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  \.git
+  | \.pytest_cache
+  | \.venv
+  | venv
+  | env
+  | notebooks
+  | artifacts
+)/
+'''
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+exclude = [
+  ".git",
+  ".pytest_cache",
+  ".venv",
+  "venv",
+  "env",
+  "notebooks",
+  "artifacts",
+]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.ruff.lint.per-file-ignores]
+"app/routers/*" = ["B008"]
+"ml/model_card.py" = ["E501"]
+"tests/*" = ["S101"]
