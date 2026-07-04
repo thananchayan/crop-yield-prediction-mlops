@@ -4,10 +4,15 @@ from __future__ import annotations
 
 import argparse
 from pathlib import Path
+from ml.version import MODEL_VERSION
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_EXPORT_DIR = (
-    PROJECT_ROOT / "artifacts" / "huggingface" / "crop-yield-regressor" / "v1.0.0"
+    PROJECT_ROOT
+    / "artifacts"
+    / "huggingface"
+    / "crop-yield-regressor"
+    / MODEL_VERSION
 )
 REQUIRED_FILES = {
     "README.md",

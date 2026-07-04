@@ -12,6 +12,7 @@ from app.core.exceptions import ModelLoadError, PredictionError
 from app.schemas.prediction import PredictionRequest
 from app.services.model_loader import ModelService, load_model_service
 from app.services.prediction_service import PredictionService
+from ml.version import MODEL_VERSION
 
 
 def test_model_loading_from_configured_artifacts() -> None:
@@ -21,7 +22,7 @@ def test_model_loading_from_configured_artifacts() -> None:
 
     assert model_service.is_loaded is True
     assert model_service.metadata.model_id == "crop-yield-regressor"
-    assert model_service.metadata.model_version == "v1.0.0"
+    assert model_service.metadata.model_version == MODEL_VERSION
     assert model_service.preprocessing_metadata["encoded_feature_count"] > 0
     assert Path(model_service.model_path).exists()
 

@@ -35,14 +35,46 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install -r requirements-dev.txt
 
+      - name: Train model and generate artifacts
+        run: |
+          python -m ml.train
+
+      - name: Show generated artifacts
+        run: |
+          echo "===== Models ====="
+          find artifacts/models -type f
+
+          echo "===== Metrics ====="
+          find artifacts/metrics -type f
+
+      - name: Verify generated artifacts
+        run: |
+          echo "===== Current directory ====="
+          pwd
+
+          echo "===== Repository ====="
+          ls -la
+
+          echo "===== Artifacts ====="
+          find artifacts -type f || true
+
+          echo "===== Model files ====="
+          find . -name "*.joblib"
+
+          echo "===== JSON files ====="
+          find . -name "*.json"
+
       - name: Run lint
-        run: python -m ruff check app ml tests
+        run: |
+          python -m ruff check app ml tests
 
       - name: Run formatting check
-        run: python -m black --check app ml tests
+        run: |
+          python -m black --check app ml tests
 
       - name: Run tests
-        run: python -m pytest
+        run: |
+          python -m pytest -v
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
