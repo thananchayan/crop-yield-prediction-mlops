@@ -6,6 +6,7 @@ import os
 from dataclasses import dataclass, field
 from functools import lru_cache
 from pathlib import Path
+from ml.version import MODEL_VERSION
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
@@ -26,9 +27,7 @@ class Settings:
         default_factory=lambda: os.getenv("APP_ENV", "development")
     )
     api_version: str = field(default_factory=lambda: os.getenv("API_VERSION", "v1.0.0"))
-    model_version: str = field(
-        default_factory=lambda: os.getenv("MODEL_VERSION", "v1.0.0")
-    )
+    model_version: str = MODEL_VERSION
     model_source: str = field(
         default_factory=lambda: os.getenv("MODEL_SOURCE", "local")
     )
