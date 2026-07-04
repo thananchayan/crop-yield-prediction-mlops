@@ -8,7 +8,7 @@ deployed, and served through a REST API with a modern web frontend.
 ## 🚀 Live Demo
 
 -   **Frontend (Hugging Face Space):**
-    https://huggingface.co/spaces/thananchayan/crop-yield-prediction
+    https://thananchayan-crop-yield-prediction.hf.space/index.html
 -   **Model Hub:**
     https://huggingface.co/thananchayan/crop-yield-regressor
 
