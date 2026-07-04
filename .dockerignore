@@ -1,29 +1,37 @@
 .git
 .gitignore
+
 .pytest_cache
 .coverage
+
 __pycache__/
 *.py[cod]
 *.pyo
 *.pyd
+
 .Python
+
 .venv/
 venv/
 env/
+
 logs/
 notebooks/
 data/
 tests/
-ml/
+
 README.md
 requirements-dev.txt
+requirements-dev.lock
 pytest.ini
 
+# Ignore everything in artifacts
 artifacts/**
+
+# But keep models
 !artifacts/models/
-!artifacts/models/v1.0.0/
-!artifacts/models/v1.0.0/crop_yield_model.joblib
+!artifacts/models/**
+
+# Keep metrics
 !artifacts/metrics/
-!artifacts/metrics/v1.0.0/
-!artifacts/metrics/v1.0.0/model_metadata.json
-!artifacts/metrics/v1.0.0/preprocessing_metadata.json
+!artifacts/metrics/**

@@ -88,7 +88,6 @@ dist/
 # ML Models
 # (Don't store trained models in Git)
 # ==========================
-models/
 artifacts/
 
 *.joblib

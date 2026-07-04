@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from ml.version import MODEL_VERSION
+
 
 def test_root_endpoint(client) -> None:
     response = client.get("/")
@@ -10,7 +12,7 @@ def test_root_endpoint(client) -> None:
     payload = response.json()
     assert payload["success"] is True
     assert payload["service"] == "Crop Yield Prediction API"
-    assert payload["version"] == "v1.0.0"
+    assert payload["version"] == MODEL_VERSION
     assert payload["request_id"]
 
 
@@ -34,9 +36,9 @@ def test_version_endpoint(client) -> None:
     assert response.status_code == 200
     payload = response.json()
     assert payload["success"] is True
-    assert payload["api_version"] == "v1.0.0"
+    assert payload["api_version"] == MODEL_VERSION
     assert payload["model"]["id"] == "crop-yield-regressor"
-    assert payload["model"]["version"] == "v1.0.0"
+    assert payload["model"]["version"] == MODEL_VERSION
     assert payload["model"]["type"] == "HistGradientBoostingRegressor"
     assert "r2" in payload["model"]["metrics"]
 
@@ -50,7 +52,7 @@ def test_predict_endpoint(client, valid_prediction_payload) -> None:
     assert payload["prediction"] > 0
     assert payload["unit"] == "hg/ha"
     assert payload["model_id"] == "crop-yield-regressor"
-    assert payload["model_version"] == "v1.0.0"
+    assert payload["model_version"] == MODEL_VERSION
     assert response.headers["x-request-id"] == payload["request_id"]
 
 

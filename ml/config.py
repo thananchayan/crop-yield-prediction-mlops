@@ -5,6 +5,8 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from pathlib import Path
 
+from ml.version import MODEL_VERSION
+
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -18,7 +20,7 @@ class TrainingConfig:
     model_card_dir: Path = PROJECT_ROOT / "artifacts" / "model_cards"
     hf_export_dir: Path = PROJECT_ROOT / "artifacts" / "huggingface"
     logs_dir: Path = PROJECT_ROOT / "logs"
-    model_version: str = "v1.0.0"
+    model_version: str = MODEL_VERSION
     model_id: str = "crop-yield-regressor"
     hf_repo_id: str = "your-username/crop-yield-regressor"
     target_column: str = "hg/ha_yield"
